@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+  webapi:
+    container_name: webapi_prod
+    image: margaretkru/words-api:latest
+    restart: always
+    environment:
+      - MONGO_URL=mongodb://mongodbserver_prod:27018/words-app
+    ports:
+      - "4010:4000"
+    expose:
+      - "4000"
+    networks:
+      - webapi_prod_network
+    depends_on:
+      - mongodbserver
+
+  mongodbserver:
+    container_name: mongodbserver_prod
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    command: mongod --port 27018
+    restart: always
+    networks:
+      - webapi_prod_network
+    environment:
+      - MONGO_INITDB_DATABASE=words-app
+    volumes:
+      - "./mongodb_prod:/data/db" # ./mongodb_prod is the directory on the host machine
+
+networks:
+  webapi_prod_network:
+    name: webapi_prod_network

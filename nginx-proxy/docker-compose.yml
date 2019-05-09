@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  proxy:
+    build: ./
+    networks:
+      - dev
+      - prod
+    ports:
+      - 80:80
+
+networks:
+  dev:
+    external:
+      name: webapi_dev_network
+  prod:
+    external:
+      name: webapi_prod_network

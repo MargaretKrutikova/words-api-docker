@@ -1,0 +1,33 @@
+version: "3.5"
+services:
+  webapi:
+    container_name: webapi_dev
+    image: margaretkru/words-api:latest
+    restart: always
+    environment:
+      - MONGO_URL=mongodb://mongodbserver_dev/words-app
+    ports:
+      - "4000:4000"
+    expose:
+      - "4000"
+    networks:
+      - webapi_dev_network
+    depends_on:
+      - mongodbserver
+
+  mongodbserver:
+    container_name: mongodbserver_dev
+    image: margaretkru/words-db-dev:latest
+    restart: always
+    networks:
+      - webapi_dev_network
+    environment:
+      - MONGO_INITDB_DATABASE=words-app
+    volumes:
+      - "./mongodb_dev:/data/db" # ./mongodb is the directory on the host machine
+    ports:
+      - "27017:27017"
+
+networks:
+  webapi_dev_network:
+    name: webapi_dev_network

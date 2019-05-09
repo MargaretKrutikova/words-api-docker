@@ -1,0 +1,4 @@
+dev/mongodb_dev
+prod/mongodb_prod
+prod/mongo/dump
+.DS_Store
