@@ -2,6 +2,7 @@ version: "3.5"
 services:
   proxy:
     build: ./
+    container_name: nginx-proxy
     networks:
       - dev
       - prod
