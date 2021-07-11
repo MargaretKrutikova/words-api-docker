@@ -17,3 +17,9 @@ exit
 ```shell
 sudo docker exec mongodbserver_prod sh -c 'mongodump --db words-app --port 27018' > ./words-app-prod.dump
 ```
+
+## Copy to local machine over ssh
+
+```shell
+scp username@ip-address:/home/.../words-app-prod.dump /path/on/local/machine
+```
