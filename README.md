@@ -23,3 +23,15 @@ sudo docker exec mongodbserver_prod sh -c 'mongodump --db words-app --port 27018
 ```shell
 scp username@ip-address:/home/.../words-app-prod.dump /path/on/local/machine
 ```
+
+## View collections
+
+```shell
+sudo docker exec mongodbserver_prod sh -c 'mongo words-app --port 27018 --eval "db.getCollectionNames()"'
+```
+
+## Export collection as json
+
+```shell
+sudo docker exec mongodbserver_prod sh -c 'mongoexport --db words-app --port 27018 -c words' > words.json
+```
